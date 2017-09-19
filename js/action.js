@@ -7,6 +7,8 @@ import { CALL_API } from 'redux-api-middleware'
 // - FAILURE 出たらエラー表示
 //
 // とかできる。
+//
+// 今回どの API でも同じ内容返すようにしてるので SUCCESS というアクション使いまわしいるけど、普通は API ごとに別のアクション名つけるようにする。
 
 export default {
   load: ()=> {
