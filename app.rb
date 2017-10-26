@@ -45,3 +45,19 @@ put '/api/todos/:id' do
   
   res
 end
+
+put '/api/todos/:id/restore' do
+  content_type :json
+
+  complete = JSON.parse(REDIS.get("todo_sample_redux/complete") || [].to_json)
+  task = complete.select{|x| x["id"] == params[:id] }.first
+  complete.reject!{|x| x["id"] == params[:id] }
+
+  incomplete = JSON.parse(REDIS.get("todo_sample_redux/incomplete") || [].to_json)
+  incomplete << task
+
+  REDIS.set("todo_sample_redux/incomplete", incomplete.to_json)
+  REDIS.set("todo_sample_redux/complete", complete.to_json)
+
+  res
+end

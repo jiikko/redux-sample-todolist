@@ -42,6 +42,16 @@ export default {
         body: JSON.stringify({title: title})
       }
     }
+  },
+  restore: (id)=> {
+    return {
+      [CALL_API]: {
+        endpoint: `/api/todos/${id}/restore`,
+        method: 'PUT',
+        types: ['REQUEST', 'SUCCESS', 'FAILURE'],
+        credentials: 'same-origin',
+      }
+    }
   }
 
 }

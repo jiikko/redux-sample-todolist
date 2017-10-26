@@ -1,9 +1,5 @@
 import React from 'react'
 
-const complete_todos = (todo)=>{
-  return <li key={todo.id}>{todo.title}</li>
-}
-
 class IncompleteTodo extends React.Component {
   click(){
     // 上位コンポーネントから props 渡しされてきた action creator を呼び出すことも当然可能
@@ -15,6 +11,21 @@ class IncompleteTodo extends React.Component {
       <input type='checkbox' onClick={()=>this.click()}/>
       {this.props.todo.title}
     </li>
+  }
+}
+
+class CompleteTodo extends React.Component {
+  click() {
+    this.props.restore(this.props.todo.id);
+  }
+
+  render() {
+    return(
+      <li key={this.props.todo.id}>
+        <input type='checkbox' onClick={()=>this.click()}/>
+        {this.props.todo.title}
+      </li>
+    )
   }
 }
 
@@ -43,7 +54,7 @@ export default class App extends React.Component {
       </ul>
       <h3>Complete Todos</h3>
       <ul>
-        {this.props.todos.complete.map((todo)=> complete_todos(todo))}
+        {this.props.todos.complete.map((todo)=> <CompleteTodo todo={todo} restore={this.props.restore}/>)}
       </ul>
     </div>
   }
