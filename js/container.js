@@ -17,7 +17,8 @@ const mapDispatchToProps = (dispatch)=>{
   return {
     load: ()=> { return dispatch(action.load()); },
     complete: (id)=> {return dispatch(action.complete(id)); },
-    add: (title)=> {return dispatch(action.add(title)); }
+    add: (title)=> {return dispatch(action.add(title)); },
+    restore: (id)=> {return dispatch(action.restore(id)); },
   }
 }
 
